@@ -8,6 +8,14 @@ target 'MyGallery' do
 
   use_react_native!(:path => config["reactNativePath"])
 
+  pod 'RNFileViewer', :path => '../node_modules/react-native-file-viewer'
+
+  pod 'RNFS', :path => '../node_modules/react-native-fs'
+
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
+  pod 'react-native-cameraroll', :path => '../node_modules/@react-native-community/cameraroll'
+
   target 'MyGalleryTests' do
     inherit! :complete
     # Pods for testing
