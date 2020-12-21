@@ -9,7 +9,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 const RECYCLE_BIN_PATH = RNFS.DocumentDirectoryPath + "/Recycle-bin/";
 RNFS.mkdir(RECYCLE_BIN_PATH).catch(error => console.log("Error to create recycle bin: " + error));
 
-RNFS.readDir(RNFS.ExternalStorageDirectoryPath).then(r => console.log(r)).catch(e => console.error(e))
+RNFS.readDir(RNFS.ExternalStorageDirectoryPath).then(r => console.log("Directory retrieved...")).catch(e => console.error(e))
 
 const getPermissions = async () => {
     console.log("Requesting permissoins");

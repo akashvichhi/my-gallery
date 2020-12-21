@@ -19,7 +19,6 @@ const Tab = createMaterialTopTabNavigator();
 
 export default class Home extends React.Component {
     render(){
-        const { files } = this.props.route.params;
         return(
         <View style={style.homeContainer}>
             <Tab.Navigator
@@ -50,7 +49,6 @@ export default class Home extends React.Component {
                     options={{
                         tabBarIcon: props => <Icon name="image-inverted" family="Entypo" size={26} color={props.color} />
                     }}
-                    initialParams={{ files: files }}
                 />
                 <Tab.Screen
                     name="Videos"
@@ -58,7 +56,6 @@ export default class Home extends React.Component {
                     options={{
                         tabBarIcon: props => <Icon name="video" family="Entypo" size={26} color={props.color} />
                     }}
-                    initialParams={{ files: files }}
                 />
                 <Tab.Screen
                     name="Album"
@@ -66,7 +63,6 @@ export default class Home extends React.Component {
                     options={{
                         tabBarIcon: props => <Ionicons name="md-albums" size={26} color={props.color} />
                     }}
-                    initialParams={{ files: files }}
                 />
             </Tab.Navigator>
         </View>

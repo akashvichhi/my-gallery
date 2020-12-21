@@ -67,7 +67,6 @@ export default class Videos extends React.Component {
     loadFiles = async () => {
         this.showRefreshing();
         let files = await Functions.getFiles('videos');
-        // console.log(files.length)
         this.saveFiles(files);
     }
     saveFiles = files => {

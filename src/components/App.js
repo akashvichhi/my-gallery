@@ -30,60 +30,57 @@ const Drawer = createDrawerNavigator();
 export default class Home extends React.Component {
     state = {
         showLoadingScreen: true,
-        files: [],
     }
     componentDidMount = async () => {
-        const files = await Functions.getFiles();
-        this.setState({ showLoadingScreen: false, files: files });
-
         // set default gridItems if not set
         const gridItemsPerRow = await AsyncStorage.getItem('gridItemsPerRow');
         if(!gridItemsPerRow) AsyncStorage.setItem('gridItemsPerRow', '3');
+
+        setTimeout(() => {
+            this.setState({ showLoadingScreen: false });
+        }, 3000)
     }
     render(){
-        if(this.state.showLoadingScreen){
-            return <LoadingScreen />
-        }
         return(
-        <View style={style.homeContainer}>
-            <StatusBar barStyle="dark-content" backgroundColor={Theme.colors.activeTab} />
-            <NavigationContainer>
-                <Drawer.Navigator
-                    backBehavior="initialRoute"
-                    drawerContentOptions={{
-                        activeTintColor: Theme.colors.activeDrawer,
-                        inactiveTintColor: Theme.colors.inactiveDrawer,
-                        labelStyle: {
-                            fontSize: 14,
-                            marginLeft: -10,
-                        }
-                    }}
-                >
-                    <Drawer.Screen
-                        name="Home"
-                        component={HomeScreen}
-                        options={{
-                            drawerIcon: props => <Ionicons name="ios-home" color={props.color} size={iconSize} style={style.drawerIcon} />
+            <View style={style.homeContainer}>
+                {this.state.showLoadingScreen && <LoadingScreen />}
+                <StatusBar barStyle="dark-content" backgroundColor={Theme.colors.activeTab} />
+                <NavigationContainer>
+                    <Drawer.Navigator
+                        backBehavior="initialRoute"
+                        drawerContentOptions={{
+                            activeTintColor: Theme.colors.activeDrawer,
+                            inactiveTintColor: Theme.colors.inactiveDrawer,
+                            labelStyle: {
+                                fontSize: 14,
+                                marginLeft: -10,
+                            }
                         }}
-                        initialParams={{ files: this.state.files }}
-                    />
-                    <Drawer.Screen
-                        name="Recycle Bin"
-                        component={RecycleBinScreen}
-                        options={{
-                            drawerIcon: props => <Icon name="trash" family="Entypo" color={props.color} size={iconSize} style={style.drawerIcon} />
-                        }}
-                    />
-                    <Drawer.Screen
-                        name="Settings"
-                        component={SettingsScreen}
-                        options={{
-                            drawerIcon: props => <MaterialIcons name="settings" color={props.color} size={iconSize} style={style.drawerIcon} />
-                        }}
-                    />
-                </Drawer.Navigator>
-            </NavigationContainer>
-        </View>
+                    >
+                        <Drawer.Screen
+                            name="Home"
+                            component={HomeScreen}
+                            options={{
+                                drawerIcon: props => <Ionicons name="ios-home" color={props.color} size={iconSize} style={style.drawerIcon} />
+                            }}
+                        />
+                        <Drawer.Screen
+                            name="Recycle Bin"
+                            component={RecycleBinScreen}
+                            options={{
+                                drawerIcon: props => <Icon name="trash" family="Entypo" color={props.color} size={iconSize} style={style.drawerIcon} />
+                            }}
+                        />
+                        <Drawer.Screen
+                            name="Settings"
+                            component={SettingsScreen}
+                            options={{
+                                drawerIcon: props => <MaterialIcons name="settings" color={props.color} size={iconSize} style={style.drawerIcon} />
+                            }}
+                        />
+                    </Drawer.Navigator>
+                </NavigationContainer>
+            </View>
         )
     }
 }
