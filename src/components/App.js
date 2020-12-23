@@ -64,7 +64,7 @@ export default class Home extends React.Component {
 
         setTimeout(() => {
             this.setState({ showLoadingScreen: false });
-        }, 3000)
+        }, 2000)
     }
     render(){
         return(

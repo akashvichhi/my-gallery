@@ -40,9 +40,11 @@ const style = StyleSheet.create({
         height: '100%',
     },
     selectIcon: {
+        backgroundColor: "#fff",
+        borderRadius: 40,
         position: 'absolute',
-        top: 10,
-        right: 10,
+        top: -6,
+        right: -6,
     },
     image: {
         backgroundColor: "#fff",
@@ -52,7 +54,7 @@ const style = StyleSheet.create({
     },
     selectedGrid: {
         borderColor: Theme.colors.activeTab,
-        borderWidth: 3,
+        borderWidth: 6,
     },
     albums: {
         paddingBottom: 55,
@@ -158,11 +160,11 @@ export default class Simple extends React.Component {
                                         <Icon name="playcircleo" family="AntDesign" size={28} color={Theme.colors.activeTab} />
                                     </View>
                                 }
+                                {this.props.showMoreOptions && data.selected &&
+                                    <Icon name="checkcircle" family="AntDesign" size={24} color={Theme.colors.activeTab} style={style.selectIcon} />
+                                }
                             </>
                         </TouchableHighlight>
-                        {this.props.showMoreOptions && data.selected &&
-                            <Icon name="checkcircle" family="AntDesign" size={20} color={Theme.colors.activeTab} style={style.selectIcon} />
-                        }
                         {albums && 
                             <View style={style.albumName}>
                                 <Text p size={14}  numberOfLines={1} color={Theme.colors.textColor}>{item.group_name}</Text>
