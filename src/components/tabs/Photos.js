@@ -53,7 +53,7 @@ export default class Images extends React.Component {
     showDeletePopup = () => this.setState({ showDeletePopup: true })
     hideDeletePopup = () => this.setState({ showDeletePopup: false })
     backAction = () => {
-        if(this.state.showMoreOptions){
+        if(this.state.renderTab && this.state.showMoreOptions){
             this.hideMoreOptions();
             this.deselectAll();
             return true;
@@ -64,7 +64,10 @@ export default class Images extends React.Component {
         this.loadFiles();
     }
     hideMoreOptions = () => { this.setState({ showMoreOptions: false }); this.deselectAll() }
-    showMoreOptions = () => this.setState({ showMoreOptions: true })
+    showMoreOptions = index => {
+        this.setState({ showMoreOptions: true })
+        this.showItem(index);
+    }
     loadFiles = async () => {
         this.showRefreshing();
         const files = await Functions.getFiles('images');

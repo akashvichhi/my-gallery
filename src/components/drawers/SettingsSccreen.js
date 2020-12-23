@@ -61,7 +61,7 @@ const style = StyleSheet.create({
         borderLeftWidth: 0,
     },
     activeGridOption: {
-        backgroundColor: Theme.colors.inactiveTab,
+        backgroundColor: Theme.colors.activeTab,
     },
     hideGridModal: {
         alignItems: 'center',

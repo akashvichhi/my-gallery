@@ -55,11 +55,11 @@ export default class Album extends React.Component {
     showDeletePopup = () => this.setState({ showDeletePopup: true })
     hideDeletePopup = () => this.setState({ showDeletePopup: false })
     backAction = () => {
-        if(this.state.showMoreOptions){
+        if(this.state.renderTab && this.state.showMoreOptions){
             this.hideMoreOptions();
             return true;
         }
-        if(this.state.showAlbum){
+        if(this.state.renderTab && this.state.showAlbum){
             this.hideAlbum();
             return true;
         }
@@ -69,7 +69,10 @@ export default class Album extends React.Component {
         this.loadFiles();
     }
     hideMoreOptions = () => { this.setState({ showMoreOptions: false }); this.deselectAll() }
-    showMoreOptions = () => this.setState({ showMoreOptions: true })
+    showMoreOptions = index => {
+        this.setState({ showMoreOptions: true })
+        this.showAlbumImage(index);
+    }
     hideAlbum = () => {
         this.setState({ showAlbum: false, album: [], albumImages: [], viewImageIndex: -1 });
     }

@@ -45,11 +45,10 @@ const style = StyleSheet.create({
         right: 10,
     },
     image: {
+        backgroundColor: "#fff",
+        elevation: 2,
         height: '100%',
         width: '100%',
-    },
-    selectImage: {
-        opacity: 0.7,
     },
     selectedGrid: {
         borderColor: Theme.colors.activeTab,
@@ -134,11 +133,6 @@ export default class Simple extends React.Component {
             itemStyle.push(style.albums)
         }
 
-        let imageStyle = [style.image];
-        if(this.props.showMoreOptions){
-            imageStyle.push(style.selectImage);
-        }
-
         let gridStyle = [style.gridItem];
         if(this.props.showMoreOptions && data.selected){
             gridStyle.push(style.selectedGrid);
@@ -154,8 +148,8 @@ export default class Simple extends React.Component {
                         <TouchableHighlight
                             underlayColor="transparent"
                             onPress={this.props.onPress.bind(this.props.this, index)}
-                            onLongPress={this.props.onLongPress}
-                            style={imageStyle}
+                            onLongPress={() => this.props.onLongPress(index)}
+                            style={style.image}
                         >
                             <>
                                 <Image style={style.imageBlock} source={{ uri: item.image.uri}} />

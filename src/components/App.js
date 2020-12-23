@@ -11,8 +11,8 @@ import HomeScreen from './drawers/HomeSccreen';
 import RecycleBinScreen from './drawers/RecycleBinScreen';
 import SettingsScreen from './drawers/SettingsSccreen';
 import LoadingScreen from './LoadingScreen';
+import AboutScreen from './drawers/AboutScreen';
 import AsyncStorage from "@react-native-community/async-storage";
-import Functions from "./Functions";
 
 const style = StyleSheet.create({
     homeContainer: {
@@ -76,6 +76,13 @@ export default class Home extends React.Component {
                             component={SettingsScreen}
                             options={{
                                 drawerIcon: props => <MaterialIcons name="settings" color={props.color} size={iconSize} style={style.drawerIcon} />
+                            }}
+                        />
+                        <Drawer.Screen
+                            name="About Us"
+                            component={AboutScreen}
+                            options={{
+                                drawerIcon: props => <MaterialIcons name="info" color={props.color} size={iconSize} style={style.drawerIcon} />
                             }}
                         />
                     </Drawer.Navigator>

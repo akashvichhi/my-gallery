@@ -2,8 +2,8 @@ const Theme = {
     colors: {
         tabBg: '#CDCDCD',
         activeTabBg: '#CCCCCC',
-        activeTab: '#03A8C9',
-        inactiveTab: '#68E4FD',
+        activeTab: '#0b9bb8',
+        inactiveTab: '#57d2eb',
         activeDrawer: '#1A1A1A',
         inactiveDrawer: '#777777',
         textColor: '#000000',
