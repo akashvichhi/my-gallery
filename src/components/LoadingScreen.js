@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, Modal, ActivityIndicator } from 'react-native';
+import { View, StyleSheet, Modal, ActivityIndicator, Image } from 'react-native';
 import { Text } from 'galio-framework';
 import Theme from '../constants/Theme';
 
@@ -34,10 +34,14 @@ export default class extends React.Component {
                 onRequestClose={() => {}}
             >
                 <View style={style.container}>
-                    <Text p size={28}>My Gallery</Text>
+                    <Image
+                        source={require("../images/icon.png")}
+                        style={{ height: 60, width: 60 }}
+                    />
+                    <Text p size={28} style={{ marginTop: 5 }}>My Gallery</Text>
                     <View style={style.indicator}>
                         <ActivityIndicator color={Theme.colors.activeDrawer} size="small" />
-                        <Text p size={16} style={{ marginLeft: 5 }}>Loading</Text>
+                        <Text p size={16} style={{ marginLeft: 6 }}>Loading</Text>
                     </View>
                     <View style={style.copyrights}>
                         <Text p size={16}>Made by </Text>

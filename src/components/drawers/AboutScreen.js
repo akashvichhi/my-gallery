@@ -70,7 +70,7 @@ export default class About extends React.Component {
                     <View style={[style.description, style.dev]}>
                         <Text p size={16}>Developed by</Text>
                         <TouchableWithoutFeedback onPress={this.openLink}>
-                            <Text p size={16} style={style.company}> codespan</Text>
+                            <Text p size={16} style={style.company}> Codespan</Text>
                         </TouchableWithoutFeedback>
                     </View>
                     <View>
