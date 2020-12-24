@@ -49,7 +49,7 @@ const DrawerContent = props => {
                     label="Rate Us"
                     labelStyle={{ marginLeft: -10 }}
                     icon={({ color }) => <Icon name="star" family="AntDesign" color={color} size={iconSize} style={{ marginLeft: 10 }} />}
-                    onPress={() => Linking.openURL("market://details?id=com.mygallery")}
+                    onPress={() => Linking.openURL("http://play.google.com/store/apps/details?id=com.cs_mygallery")}
                 />
             </DrawerContentScrollView>
             <TouchableOpacity activeOpacity={0.6} onPress={sendFeedback} style={style.sendFeedbackBtn}>
