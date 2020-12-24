@@ -1,4 +1,4 @@
-package com.mygallery;
+package com.cs_mygallery;
 
 import com.facebook.react.ReactActivity;
 

@@ -35,12 +35,12 @@ android_library(
 
 android_build_config(
     name = "build_config",
-    package = "com.mygallery",
+    package = "com.cs_mygallery",
 )
 
 android_resource(
     name = "res",
-    package = "com.mygallery",
+    package = "com.cs_mygallery",
     res = "src/main/res",
 )
 
