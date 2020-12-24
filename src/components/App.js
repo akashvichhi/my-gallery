@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, StatusBar, TouchableOpacity, Linking } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList } from '@react-navigation/drawer';
+import { createDrawerNavigator, DrawerContentScrollView, DrawerItemList, DrawerItem } from '@react-navigation/drawer';
 import { Text, Icon } from 'galio-framework';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -45,6 +45,12 @@ const DrawerContent = props => {
         <View style={{ flex: 1 }}>
             <DrawerContentScrollView {...props}>
                 <DrawerItemList {...props} />
+                <DrawerItem
+                    label="Rate Us"
+                    labelStyle={{ marginLeft: -10 }}
+                    icon={({ color }) => <Icon name="star" family="AntDesign" color={color} size={iconSize} style={{ marginLeft: 10 }} />}
+                    onPress={() => Linking.openURL("market://details?id=com.mygallery")}
+                />
             </DrawerContentScrollView>
             <TouchableOpacity activeOpacity={0.6} onPress={sendFeedback} style={style.sendFeedbackBtn}>
                 <Text p size={16}>Send Feedback</Text>
