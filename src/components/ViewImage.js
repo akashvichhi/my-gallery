@@ -137,7 +137,7 @@ export default class ViewImage extends React.Component {
     }
     playVideo = path => {
         path = path.replace('file://', '');
-        FileViewer.open(path).catch(error => console.log(error));
+        FileViewer.open(path, { showOpenWithDialog: true, showAppsSuggestions: true }).catch(error => console.log(error));
     }
     ImageHeader = ({ imageIndex }) => {
         if(this.props.images[imageIndex]){
