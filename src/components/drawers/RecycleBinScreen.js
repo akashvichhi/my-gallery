@@ -110,6 +110,7 @@ export default class RecycleBin extends React.Component {
     restoreRecycleFiles = () => {
         const files = this.state.data.filter(d => d.selected).map(d => d.node);
         Functions.restoreRecycle(files).then(() => {
+            Functions.showToastMessage("Files restored successfully");
             const recycleFiles = this.state.data.filter(d => !d.selected);
             this.saveFiles(recycleFiles);
             this.hideMoreOptions();

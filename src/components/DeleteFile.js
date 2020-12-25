@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableHighlight, Modal, StyleSheet, BackHandler } from 'react-native';
+import { View, TouchableHighlight, Modal, StyleSheet, BackHandler, ToastAndroid } from 'react-native';
 import { Text } from 'galio-framework';
 import Theme from '../constants/Theme';
 import Functions from './Functions';
@@ -51,6 +51,7 @@ export default class DeleteFile extends React.Component{
         try{
             this.props.closePopup();
             await Functions.moveToRecycle(this.props.files);
+            Functions.showToastMessage("Files moved to bin");
             this.props.afterDelete(this.props.files);
         }
         catch(error){ console.log(error) }
@@ -64,6 +65,7 @@ export default class DeleteFile extends React.Component{
             else{
                 await Functions.deletePermanently(this.props.files);
             }
+            Functions.showToastMessage("Files deleted successfully");
             this.props.afterDelete(this.props.files);
         }
         catch(error){ console.log(error) }

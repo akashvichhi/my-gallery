@@ -1,5 +1,5 @@
 import React from 'react';
-import { PermissionsAndroid } from 'react-native';
+import { PermissionsAndroid, ToastAndroid } from 'react-native';
 import CameraRoll from '@react-native-community/cameraroll';
 var MIME = require('mime');
 var RNFS = require('react-native-fs');
@@ -198,4 +198,6 @@ export default class Functions extends React.Component {
         }
         catch(error){ reject(error) }
     })
+
+    static showToastMessage = message => ToastAndroid.showWithGravity(message, ToastAndroid.LONG, ToastAndroid.CENTER)
 }
