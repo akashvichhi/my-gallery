@@ -8,7 +8,7 @@ const Theme = {
         inactiveDrawer: '#777777',
         textColor: '#000000',
     },
-    VERSION: "20.0.1",
+    VERSION: "20.2.0",
 };
 
 export default Theme;
