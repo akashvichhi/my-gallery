@@ -76,7 +76,8 @@ const style = StyleSheet.create({
     videoContainer: {
         alignItems: 'center',
         height: 40,
-        width: '100%'
+        marginBottom: 15,
+        width: '100%',
     },
     playBtn: {
         alignItems: 'center',
