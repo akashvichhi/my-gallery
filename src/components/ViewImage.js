@@ -1,7 +1,7 @@
 import React from 'react';
-import { View, TouchableHighlight, Modal, Dimensions, BackHandler } from 'react-native';
+import { View, TouchableHighlight, Modal, Dimensions, BackHandler, Image } from 'react-native';
 import { Text, Icon } from 'galio-framework';
-import ImageView from "react-native-image-viewing";
+import ImageViewer from "react-native-image-zoom-viewer";
 import Menu, { MenuItem } from 'react-native-material-menu';
 import FileViewer from 'react-native-file-viewer';
 
@@ -16,7 +16,7 @@ import DeleteFile from './DeleteFile';
 
 const windowWidth = Dimensions.get('window').width;
 const closeHeaderWidth = 35;
-const headerOptionsWidth = 27;
+const headerOptionsWidth = 30;
 const headerTitleWidth = windowWidth - (closeHeaderWidth + headerOptionsWidth + 10);
 
 const style = StyleSheet.create({
@@ -25,7 +25,9 @@ const style = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         paddingHorizontal: 10,
-        paddingVertical: 20,
+        paddingVertical: 15,
+        position: "absolute",
+        zIndex: 999,
     },
     closeBtn: {
         width: closeHeaderWidth,
@@ -75,8 +77,10 @@ const style = StyleSheet.create({
     },
     videoContainer: {
         alignItems: 'center',
-        height: 40,
-        marginBottom: 15,
+        justifyContent: "center",
+        position: "absolute",
+        bottom: 0,
+        top: 0,
         width: '100%',
     },
     playBtn: {
@@ -140,14 +144,16 @@ export default class ViewImage extends React.Component {
         path = path.replace('file://', '');
         FileViewer.open(path, { showOpenWithDialog: true, showAppsSuggestions: true }).catch(error => console.log(error));
     }
-    ImageHeader = ({ imageIndex }) => {
+    ImageHeader = imageIndex => {
         if(this.props.images[imageIndex]){
             return(
                 <View style={style.headerContainer}>
                     <TouchableHighlight style={style.closeBtn} onPress={this.props.closeImages}>
                         <Icon name="arrowleft" family="AntDesign" size={26} color={Theme.colors.tabBg} />
                     </TouchableHighlight>
-                    <Text p size={18} color={Theme.colors.tabBg} style={style.imageName}>{this.props.images[imageIndex].image.filename}</Text>
+                    <Text p size={18} color={Theme.colors.tabBg} numberOfLines={1} style={style.imageName}>
+                        {this.props.images[imageIndex].image.filename}
+                    </Text>
                     <View style={style.options}>
                         <Menu
                             style={style.menu}
@@ -163,23 +169,26 @@ export default class ViewImage extends React.Component {
             )
         }
     }
-    ImageFooter = ({ imageIndex }) => {
-        const image = this.props.images[imageIndex];
-        if(!this.props.recycleImages && image.type.indexOf('video') >= 0){
-            return(
-                <View style={style.videoContainer}>
-                    <TouchableHighlight
-                        underlayColor="#3a3a3a"
-                        style={style.playBtn}
-                        onPress={this.playVideo.bind(this, image.uri)}
-                    >
-                        <Text p size={18} color="#fff">Play</Text>
-                    </TouchableHighlight>
+    ImageRender = props => {
+        const image = this.props.images[imageViewIndex];
+        if(!this.props.recycleImages && image.type.indexOf('video') >= 0) {
+            return (
+                <View style={style.imageRender}>
+                    <Image {...props} />
+                    <View style={style.videoContainer}>
+                        <Icon name="playcircleo" family="AntDesign" size={56} color={Theme.colors.activeTab} />
+                    </View>
                 </View>
             )
         }
-        else{
-            return null;
+        return <Image {...props} />
+    }
+    handleClick = () => {
+        if(imageViewIndex >= 0) {
+            const image = this.props.images[imageViewIndex];
+            if(!this.props.recycleImages && image.type.indexOf('video') >= 0) {
+                this.playVideo(this.props.images[imageViewIndex].uri);
+            }
         }
     }
     setImageInfo = async () => {
@@ -215,23 +224,36 @@ export default class ViewImage extends React.Component {
         imageViewIndex = index;
         this.setImageInfo();
     }
+    onCancel = () => {
+        imageViewIndex = -1;
+        this.props.closeImages();
+    }
     render(){
+        const imageUrls = this.props.images.map(i => { return { url: i.uri } });
         const color = Theme.colors.textColor;
         const size = 16;
         const titleSize = 18;
+        if(imageViewIndex == -1 && this.props.imageIndex >= 0) {
+            this.indexChange(this.props.imageIndex);
+        }
         return(
             <View>
-                <ImageView
-                    images={this.props.images}
-                    imageIndex={this.props.imageIndex}
+                <Modal transparent
                     visible={this.props.showImages}
-                    onRequestClose={this.props.closeImages}
-                    onImageIndexChange={this.indexChange}
-                    animationType="slide"
-                    swipeToCloseEnabled={false}
-                    HeaderComponent={this.ImageHeader}
-                    FooterComponent={this.ImageFooter}
-                />
+                    onRequestClose={this.onCancel}
+                >
+                    <ImageViewer
+                        imageUrls={imageUrls}
+                        index={this.props.imageIndex}
+                        onChange={this.indexChange}
+                        onClick={this.handleClick}
+                        renderHeader={this.ImageHeader}
+                        renderImage={this.ImageRender}
+                        useNativeDriver={true}
+                        onCancel={this.onCancel}
+                        saveToLocalByLongPress={false}
+                    />
+                </Modal>
                 <DeleteFile
                     showPopup={this.state.showDeletePopup}
                     closePopup={this.hideDeletePopup}
