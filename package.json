@@ -1,6 +1,6 @@
 {
   "name": "MyGallery",
-  "version": "20.4.0",
+  "version": "20.5.0",
   "private": true,
   "scripts": {
     "android": "react-native run-android",

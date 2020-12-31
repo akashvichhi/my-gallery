@@ -132,8 +132,8 @@ android {
         applicationId "com.cs_mygallery"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 204
-        versionName "20.4.0"
+        versionCode 205
+        versionName "20.5.0"
     }
     splits {
         abi {
