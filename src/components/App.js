@@ -13,6 +13,7 @@ import SettingsScreen from './drawers/SettingsSccreen';
 import LoadingScreen from './LoadingScreen';
 import AboutScreen from './drawers/AboutScreen';
 import AsyncStorage from "@react-native-community/async-storage";
+import Functions from "./Functions";
 
 const style = StyleSheet.create({
     homeContainer: {
@@ -38,18 +39,28 @@ const iconSize = 20;
 const Drawer = createDrawerNavigator();
 
 const DrawerContent = props => {
+    const playStoreUrl = "http://play.google.com/store/apps/details?id=com.cs_mygallery";
     const sendFeedback = () => {
         Linking.openURL("mailto:info@codespan.in?subject=Suggestions for My Gallery app");
+    }
+    const shareApp = () => {
+        Functions.shareItems(["Hey! I have found an amazing app for images and videos. Download an android app here.\n" + playStoreUrl]);
     }
     return (
         <View style={{ flex: 1 }}>
             <DrawerContentScrollView {...props}>
                 <DrawerItemList {...props} />
                 <DrawerItem
+                    label="Share this app"
+                    labelStyle={{ marginLeft: -10 }}
+                    icon={({ color }) => <MaterialIcons name="share" color={color} size={iconSize} style={{ marginLeft: 10 }} />}
+                    onPress={shareApp}
+                />
+                <DrawerItem
                     label="Rate Us"
                     labelStyle={{ marginLeft: -10 }}
                     icon={({ color }) => <Icon name="star" family="AntDesign" color={color} size={iconSize} style={{ marginLeft: 10 }} />}
-                    onPress={() => Linking.openURL("http://play.google.com/store/apps/details?id=com.cs_mygallery")}
+                    onPress={() => Linking.openURL(playStoreUrl)}
                 />
             </DrawerContentScrollView>
             <TouchableOpacity activeOpacity={0.6} onPress={sendFeedback} style={style.sendFeedbackBtn}>
