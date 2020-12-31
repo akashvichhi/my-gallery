@@ -11,24 +11,24 @@ RNFS.mkdir(RECYCLE_BIN_PATH).catch(error => console.log("Error to create recycle
 
 RNFS.readDir(RNFS.ExternalStorageDirectoryPath).then(r => console.log("Directory retrieved...")).catch(e => console.error(e))
 
-const getPermissions = async () => {
+const getPermissions = () => new Promise(async (resolve, reject) => {
     console.log("Requesting permissoins");
     try{
         const granted = await PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE);
         if(granted === PermissionsAndroid.RESULTS.GRANTED){
             console.log("Permission granted");
-            return true;
+            resolve(true);
         }
         else{
             console.log("Permission not granted");
         }
-        return false;
+        resolve(false);
     }
     catch(error){
         console.log("Error in permissions:");
-        console.log(error);
+        reject(error);
     }
-}
+})
 
 // return date in forrmat mm/dd/yyyy
 const getFormattedDate = dateObj => {
@@ -80,7 +80,6 @@ export default class Functions extends React.Component {
                         return !excludeFolders.includes(albumPath);
                     });
                 }
-                // console.log(files.length)
                 resolve(files);
             }
             resolve([]);

@@ -77,9 +77,16 @@ export default class Album extends React.Component {
         this.setState({ showAlbum: false, album: [], albumImages: [], viewImageIndex: -1 });
     }
     loadFiles = async () => {
-        this.showRefreshing();
-        const files = await Functions.getFiles();
-        this.saveFiles(files);
+        try {
+            this.showRefreshing();
+            const files = await Functions.getFiles();
+            this.saveFiles(files);
+        }
+        catch(e) {
+            this.hideRefreshing();
+            console.error(e.message);
+            Functions.showToastMessage("could not get files from storage");
+        }
     }
     saveFiles = files => {
         let albumNames = [];

@@ -69,9 +69,16 @@ export default class Images extends React.Component {
         this.showItem(index);
     }
     loadFiles = async () => {
-        this.showRefreshing();
-        const files = await Functions.getFiles('images');
-        this.saveFiles(files);
+        try {
+            this.showRefreshing();
+            const files = await Functions.getFiles('images');
+            this.saveFiles(files);
+        }
+        catch(e) {
+            this.hideRefreshing();
+            console.error(e.message);
+            Functions.showToastMessage("could not get files from storage");
+        }
     }
     saveFiles = files => {
         let allImages = [];

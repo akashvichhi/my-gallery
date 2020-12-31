@@ -68,9 +68,16 @@ export default class Videos extends React.Component {
     hideDeletePopup = () => this.setState({ showDeletePopup: false })
     hideRefreshing = () => this.setState({ refreshing: false })
     loadFiles = async () => {
-        this.showRefreshing();
-        let files = await Functions.getFiles('videos');
-        this.saveFiles(files);
+        try {
+            this.showRefreshing();
+            const files = await Functions.getFiles('videos');
+            this.saveFiles(files);
+        }
+        catch(e) {
+            this.hideRefreshing();
+            console.error(e.message);
+            Functions.showToastMessage("could not get files from storage");
+        }
     }
     saveFiles = files => {
         let allVideos = [];
