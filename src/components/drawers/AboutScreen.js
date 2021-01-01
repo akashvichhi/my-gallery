@@ -20,6 +20,10 @@ const style = StyleSheet.create({
         marginTop: 15,
         textAlign: "center",
     },
+    version: {
+        color: "#888",
+        textAlign: "center",
+    },
     description: {
         marginTop: 10,
     },
@@ -64,6 +68,7 @@ export default class About extends React.Component {
                         </View>
                     </View>
                     <Text p size={28} style={style.title}>My Gallery</Text>
+                    <Text p size={14} style={style.version}>Version: 20.6.0</Text>
                     <Text p size={16} style={style.description}>
                         My Gallery is an to view your local storage images and videos. See your saved images and videos using this app as per your settings. We do not use your personal data for our use.
                     </Text>
